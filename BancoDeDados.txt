@@ -1,0 +1,43 @@
+parte 1 
+----
+create database registro_ponto;
+----
+
+parte 2 
+-----
+create TABLE funcionarios(
+	id_funcionario int PRIMARY key AUTO_INCREMENT,
+	nome varchar(50),
+	cpf varchar(14)
+
+);
+-----
+parte 3 ->
+
+create TABLE registro_ponto(
+	id_registro int PRIMARY key AUTO_INCREMENT,
+	id_funcionario int,
+	nome varchar(50),
+	entrada varchar(5),
+	saida varchar(5),
+	entrada_2 varchar(5),
+	saida_2 varchar(5),
+	ID_CPF varchar(14),
+	CONSTRAINT FK_registro_ponto_funcionarios FOREIGN key(id_funcionario) REFERENCES funcionarios (id_funcionario)
+	
+);
+-----
+parte 4 ->
+
+INSERT INTO registro_ponto (id_funcionario, nome, entrada, saida, entrada_2, saida_2, ID_CPF)
+SELECT f.id_funcionario, f.nome, '08:00:00', '12:00:00', '13:00:00', '17:00:00', f.cpf
+FROM funcionarios f
+WHERE f.id_funcionario NOT IN (SELECT id_funcionario FROM registro_ponto);
+
+----
+
+se estiver dando erro, tente: 
+
+UPDATE registro_ponto rp
+JOIN funcionarios f ON rp.id_funcionario = f.id_funcionario
+SET ID_CPF = f.cpf;
