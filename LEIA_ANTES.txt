@@ -1,0 +1,4 @@
+Adicionar a pasta dentro das seguintes pastas: 
+xampp >> htdocs 
+
+dentro da pasta htdocs, basta colar a pasta api_PROJE dentro dele, assim a API funcionará.
